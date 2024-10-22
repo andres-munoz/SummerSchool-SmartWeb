@@ -12,10 +12,10 @@ Durante el curso se trabajan los siguientes módulos:
 2. [Modelos de lenguaje](./slides/2-Modelos-del-lenguaje.pdf)
 3. [Integrando LLM en aplicaciones](./slides/3-Integrando-LLM-en-Aplicaciones.pdf)
 4. [Prompt Engineering](./slides/4-Prompt-Engineering.pdf)
-5. Retrieval-augmented generation
-6. Agentes
-7. LLMOps
-8. Cierre
+5. [LLMOps](./slides/5-LLM-Ops.pdf)
+6. [Retrieval-augmented generation](./slides/6-Retrieval-Augmented-Generation-RAG.pdf)
+7. [Agentes](./slides/7-Agentes-LLM.pdf)
+8. [Cierre](./slides/8-Cierre.pdf)
 
 
 ## Contenido del repositorio
@@ -34,6 +34,11 @@ La aplicación ofrece las siguientes funcionalidades:
 9. Chat con memoria
 10. Asistente
 11. Servicio web del chat
+12. Asistente con EasyRAG
+13. Asistente con Naive RAG
+14. Copilot con Herramientas
+15. Buscador semántico en base de datos relacional
+16. Buscador semántico en base de datos vectorial
 
 
 ## Instrucciones de uso
