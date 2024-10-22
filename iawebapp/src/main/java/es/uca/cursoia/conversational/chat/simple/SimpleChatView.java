@@ -3,8 +3,8 @@ package es.uca.cursoia.conversational.chat.simple;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import es.uca.cursoia.MainLayout;
-import es.uca.cursoia.conversational.ConversationalService;
 import es.uca.cursoia.conversational.ConversationalView;
+import es.uca.cursoia.conversational.assistants.AssistantService;
 
 @PageTitle("Chat simple")
 @Route(value = "chats/simple", layout = MainLayout.class)
@@ -21,7 +21,7 @@ public class SimpleChatView extends ConversationalView {
     }
 
     @Override
-    protected ConversationalService getChatService() {
+    protected AssistantService getChatService() {
         return simpleChatService;
     }
 

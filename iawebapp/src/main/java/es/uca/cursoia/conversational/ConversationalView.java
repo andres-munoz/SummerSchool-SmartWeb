@@ -8,6 +8,7 @@ import com.vaadin.flow.component.messages.MessageInput;
 import com.vaadin.flow.component.messages.MessageInputI18n;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import es.uca.cursoia.conversational.assistants.AssistantService;
 import org.vaadin.firitin.components.messagelist.MarkdownMessage;
 
 import java.time.LocalDateTime;
@@ -77,7 +78,7 @@ public abstract class ConversationalView extends VerticalLayout {
         startAssistant();
     }
 
-    protected abstract ConversationalService getChatService();
+    protected abstract AssistantService getChatService();
 
     protected abstract String getWelcomeMessage();
 

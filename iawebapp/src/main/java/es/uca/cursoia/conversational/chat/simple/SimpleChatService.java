@@ -3,11 +3,11 @@ package es.uca.cursoia.conversational.chat.simple;
 import dev.langchain4j.model.chat.StreamingChatLanguageModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.TokenStream;
-import es.uca.cursoia.conversational.ConversationalService;
+import es.uca.cursoia.conversational.assistants.AssistantService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SimpleChatService implements ConversationalService {
+public class SimpleChatService extends AssistantService {
 
     private final SimpleChat simpleChat;
     private StreamingChatLanguageModel streamingChatLanguageModel;

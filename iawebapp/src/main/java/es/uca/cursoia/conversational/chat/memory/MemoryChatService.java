@@ -4,11 +4,11 @@ import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.StreamingChatLanguageModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.TokenStream;
-import es.uca.cursoia.conversational.ConversationalService;
+import es.uca.cursoia.conversational.assistants.AssistantService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MemoryChatService implements ConversationalService {
+public class MemoryChatService extends AssistantService {
 
     private final MemoryChat memoryChat;
     private StreamingChatLanguageModel streamingChatLanguageModel;
