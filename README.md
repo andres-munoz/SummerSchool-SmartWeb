@@ -1,74 +1,66 @@
-# Creación de aplicaciones enriquecidas con IA
+# Building Smart Web Apps with AI
 
-## Descripción
-Este repositorio contiene los materiales de ejemplo creados para el curso de *Creación de aplicaciones enriquecidas 
-con IA*.
+## Description
+This repository contains the sample materials created for the Internationa Summmer School course *Building Smart Web Apps with AI*.
 
-### Contenidos del curso
-Durante el curso se trabajan los siguientes módulos:
+### Course Contents
+During the course, the following modules are covered:
 
-0. [Bienvenida](./slides/0-Creacion-de-aplicaciones-enriquecidas-con-IA.pdf)
-1. [Introducción a la IA](./slides/1-Inteligencia-Artificial.pdf)
-2. [Modelos de lenguaje](./slides/2-Modelos-del-lenguaje.pdf)
-3. [Integrando LLM en aplicaciones](./slides/3-Integrando-LLM-en-Aplicaciones.pdf)
+0. [Schedule](./slides/0-Creacion-de-aplicaciones-enriquecidas-con-IA.pdf)
+1. [Introduction to AI](./slides/1-Inteligencia-Artificial.pdf)
+2. [Language Models](./slides/2-Modelos-del-lenguaje.pdf)
+3. [Integrating LLM into Applications](./slides/3-Integrando-LLM-en-Aplicaciones.pdf)
 4. [Prompt Engineering](./slides/4-Prompt-Engineering.pdf)
 5. [LLMOps](./slides/5-LLM-Ops.pdf)
-6. [Retrieval-augmented generation](./slides/6-Retrieval-Augmented-Generation-RAG.pdf)
-7. [Agentes](./slides/7-Agentes-LLM.pdf)
-8. [Cierre](./slides/8-Cierre.pdf)
+6. [Retrieval-Augmented Generation](./slides/6-Retrieval-Augmented-Generation-RAG.pdf)
+7. [Agents](./slides/7-Agentes-LLM.pdf)
+8. [Closing](./slides/8-Cierre.pdf)
 
+## Repository Contents
+In this repository you will find the source code for a web project based on Java technologies.
+The project was created using the Spring Boot, Vaadin, and LangChain4J frameworks.
 
-## Contenido del repositorio
-En este repositorio va a encontrar el código fuente de un proyecto web, basado en tecnologías Java.
-El proyecto se ha creado utilizando los frameworks Spring Boot, Vaadin y LangChain4J.
+The application offers the following functionalities:
+1. Text generator
+2. Image generator
+3. Image describer (multimodal)
+4. Text translator
+5. Text summarizer
+6. Sentiment analyzer
+7. Data extractor
+8. Simple chat
+9. Chat with memory
+10. Assistant
+11. Chat web service
+12. Assistant with EasyRAG
+13. Assistant with Naive RAG
+14. Copilot with Tools
+15. Semantic search in relational database
+16. Semantic search in vector database
 
-La aplicación ofrece las siguientes funcionalidades:
-1. Generador de texto
-2. Generador de imágenes
-3. Descriptor de imágenes (multimodal)
-4. Traductor de texto
-5. "Resumidor" de texto
-6. Analizador de sentimientos
-7. Extractor de datos
-8. Chat simple
-9. Chat con memoria
-10. Asistente
-11. Servicio web del chat
-12. Asistente con EasyRAG
-13. Asistente con Naive RAG
-14. Copilot con Herramientas
-15. Buscador semántico en base de datos relacional
-16. Buscador semántico en base de datos vectorial
+## Usage Instructions
 
+### Modifying the Application
+You can use this project in two different ways:
+- From your development machine by cloning the project with *git clone* and working locally with your IDE.
+- Using a GitHub *codespace*. A codespace is a cloud-based development environment that you can use 
+  directly without needing any additional setup.
 
-## Instrucciones de uso
+### Running the Application
+The project is a standard Maven project. To run it from the command line, use `mvnw` (Windows) or `./mvnw` (Mac and Linux), then open http://localhost:8080 in your browser.
 
-### Modificar la aplicación
-Puede hacer uso de este proyecto de dos maneras diferentes: 
-- Desde su máquina de desarrollo, haciendo un *git clone* del proyecto y trabajando de forma local con su IDE. 
-- Usando un *codespace* de GitHub. Un codespace es un entorno de desarrollo basado en la nube que se puede usar 
-  directamente sin necesidad de realizar ninguna configuración adicional.
+You can also import the project into your preferred IDE as you would with any Maven project. Read more about how to import Vaadin projects into different IDEs (Eclipse, IntelliJ IDEA, NetBeans, and VS Code).
 
+### Project Structure
+- `MainLayout.java` in `src/main/java` contains the navigation configuration (i.e., the sidebar/top bar and main menu). This configuration uses App Layout.
+- The `views` package in `src/main/java` contains the server-side Java views of your application.
+- The `views` folder in `src/main/frontend` contains the client-side JavaScript views of your application.
+- The `themes` folder in `src/main/frontend` contains custom CSS styles.
 
-### Ejecutando la aplicación
-El proyecto es un proyecto estándar de Maven. Para ejecutarlo desde la línea de comandos, escribe mvnw (Windows) o ./mvnw (Mac y Linux), luego abre http://localhost:8080 en tu navegador.
-
-También puedes importar el proyecto a tu IDE de preferencia como lo harías con cualquier proyecto de Maven. Lee más sobre cómo importar proyectos de Vaadin a diferentes IDEs (Eclipse, IntelliJ IDEA, NetBeans y VS Code).
-
-### Estructura del proyecto
-- MainLayout.java en src/main/java contiene la configuración de navegación (es decir, la barra lateral/superior y el 
-menú principal). Esta configuración utiliza App Layout.
-- El paquete views en src/main/java contiene las vistas Java del lado del servidor de tu aplicación.
-- La carpeta views en src/main/frontend contiene las vistas JavaScript del lado del cliente de tu aplicación.
-- La carpeta themes en src/main/frontend contiene los estilos CSS personalizados.
-
-## Enlaces útiles
+## Useful Links
 - [Spring](https://spring.io)
 - [Vaadin](https://vaadin.com)
 - [LangChain4J](https://docs.langchain4j.dev/)
 
-## Autoría
-Este proyecto ha sido desarrollado por [Iván Ruiz Rube](https://www.linkedin.com/in/iv%C3%A1n-ruiz-rube-0970331a).
-
-
-
+## Author
+This project was developed by [Iván Ruiz Rube](https://www.linkedin.com/in/iv%C3%A1n-ruiz-rube-0970331a) and [Andrés Muñoz](https://es.linkedin.com/in/andr%C3%A9s-mu%C3%B1oz-ortega-52235415).
