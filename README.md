@@ -6,15 +6,16 @@ This repository contains the sample materials created for the Internationa Summm
 ### Course Contents
 During the course, the following modules are covered:
 
-0. [Schedule](./slides/0-Creacion-de-aplicaciones-enriquecidas-con-IA.pdf)
-1. [Introduction to AI](./slides/1-Inteligencia-Artificial.pdf)
-2. [Language Models](./slides/2-Modelos-del-lenguaje.pdf)
-3. [Integrating LLM into Applications](./slides/3-Integrando-LLM-en-Aplicaciones.pdf)
-4. [Prompt Engineering](./slides/4-Prompt-Engineering.pdf)
-5. [LLMOps](./slides/5-LLM-Ops.pdf)
+0. [Schedule](./slides/0-Schedule.pdf)
+1. [Introduction to AI](./slides/1-Introduction-to-AI.pdf)
+2. [Language Models](./slides/2-Language-Models.pdf)
+3. [Developing Web Applications with Plain Java](./slides/3-Developing-Web-Applications-with-Plain-Java.pdf)
+4. [Integrating LLM into Applications](./slides/4-Integrating-LLM-in-applications.pdf)
+5. [Prompt Engineering](./slides/5-Prompt-Engineering.pdf)
 6. [Retrieval-Augmented Generation](./slides/6-Retrieval-Augmented-Generation-RAG.pdf)
-7. [Agents](./slides/7-Agentes-LLM.pdf)
-8. [Closing](./slides/8-Cierre.pdf)
+7. [LLM Agents](./slides/7-LLM-Agents.pdf)
+8. [LLMOps](./slides/8-LLM-Ops.pdf)
+9. [Closing](./slides/9-Closing.pdf)
 
 ## Repository Contents
 In this repository you will find the source code for a web project based on Java technologies.
