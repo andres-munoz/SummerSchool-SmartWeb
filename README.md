@@ -1,7 +1,9 @@
 # Building Smart Web Apps with AI
 
 ## Description
-This repository contains the sample materials created for the Internationa Summmer School course *Building Smart Web Apps with AI*.
+This repository contains the materials (slides and code) created for the International Summmer School course *Building 
+Smart 
+Web Apps with AI*.
 
 ### Course Contents
 During the course, the following modules are covered:
@@ -14,30 +16,35 @@ During the course, the following modules are covered:
 5. [Prompt Engineering](./slides/5-Prompt-Engineering.pdf)
 6. [Retrieval-Augmented Generation](./slides/6-Retrieval-Augmented-Generation-RAG.pdf)
 7. [LLM Agents](./slides/7-LLM-Agents.pdf)
-8. [LLMOps](./slides/8-LLM-Ops.pdf)
-9. [Closing](./slides/9-Closing.pdf)
+8. [Advanced RAG](./slides/8-Advanced-RAG.pdf)
+9. [LLMOps](./slides/9-LLM-Ops.pdf)
+10. [Closing](./slides/10-Closing.pdf)
 
-## Repository Contents
-In this repository you will find the source code for a web project based on Java technologies.
+## Smart Web App Project
+In this repository, you will find the source code for a web project based on Java technologies.
 The project was created using the Spring Boot, Vaadin, and LangChain4J frameworks.
 
 The application offers the following functionalities:
-1. Text generator
-2. Image generator
-3. Image describer (multimodal)
+1. Hello World
+2. Book management (create, read, update, delete)
+3. Text generator
+4. Image generator
+3. Image descriptor
 4. Text translator
 5. Text summarizer
 6. Sentiment analyzer
 7. Data extractor
 8. Simple chat
 9. Chat with memory
-10. Assistant
-11. Chat web service
-12. Assistant with EasyRAG
-13. Assistant with Naive RAG
-14. Copilot with Tools
-15. Semantic search in relational database
-16. Semantic search in vector database
+10. Basic assistant
+11. Semantic PDF search service
+12. Semantic Internet search 
+13. Semantic database search
+12. Assistant with PDF search
+13. Assistant with Internet search
+14. Assistant with database search
+15. Agent for book management
+16. Agent for asking Github
 
 ## Usage Instructions
 
@@ -50,13 +57,21 @@ You can use this project in two different ways:
 ### Running the Application
 The project is a standard Maven project. To run it from the command line, use `mvnw` (Windows) or `./mvnw` (Mac and Linux), then open http://localhost:8080 in your browser.
 
-You can also import the project into your preferred IDE as you would with any Maven project. Read more about how to import Vaadin projects into different IDEs (Eclipse, IntelliJ IDEA, NetBeans, and VS Code).
+You can also import the project into your preferred IDE as you would with any Maven project. Read more about how to 
+import Vaadin projects into different IDEs (Eclipse, IntelliJ IDEA, NetBeans, and VS Code). Then you can run the 
+Application class.
 
 ### Project Structure
-- `MainLayout.java` in `src/main/java` contains the navigation configuration (i.e., the sidebar/top bar and main menu). This configuration uses App Layout.
-- The `views` package in `src/main/java` contains the server-side Java views of your application.
-- The `views` folder in `src/main/frontend` contains the client-side JavaScript views of your application.
-- The `themes` folder in `src/main/frontend` contains custom CSS styles.
+- The `pom.xml` file in the root directory contains the Maven dependencies and build configuration.
+- The `src/main/resources` directory contains the application properties and static resources.
+- The `src/main/frontend` contains custom CSS styles.
+- The `src/main/java` directory contains the Java source code of the application.
+  - The `es.uca.summerschool.smartwebapp` package is the root package of the application.
+  - The `views` package contains the Vaadin views of the application.
+  - The `services` package contains the service classes that implement the business logic of the application.
+  - The `data` package contains the entity classes and the Spring Data repositories used by the application.
+  - The `security` package contains the security configuration classes.
+  - The `controllers` package contains the REST controllers for the application.
 
 ## Useful Links
 - [Spring](https://spring.io)
