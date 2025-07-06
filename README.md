@@ -65,3 +65,8 @@ You can also import the project into your preferred IDE as you would with any Ma
 
 ## Author
 This project was developed by [Iván Ruiz Rube](https://www.linkedin.com/in/iv%C3%A1n-ruiz-rube-0970331a) and [Andrés Muñoz](https://es.linkedin.com/in/andr%C3%A9s-mu%C3%B1oz-ortega-52235415).
+
+## Acknowlegments
+This course is part of the R&D&i Project PID2023-149674OB-I00 (GENIALLE), funded by MICIU/AEI/10.13039/501100011033 and ERDF, EU. 
+![](/MICIU+Cofinanciado+AEI)
+
