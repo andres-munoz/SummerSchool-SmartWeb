@@ -68,5 +68,5 @@ This project was developed by [Iván Ruiz Rube](https://www.linkedin.com/in/iv%C
 
 ## Acknowlegments
 This course is part of the R&D&i Project PID2023-149674OB-I00 (GENIALLE), funded by MICIU/AEI/10.13039/501100011033 and ERDF, EU. 
-![](/MICIU+Cofinanciado+AEI)
+![](./MICIU+Cofinanciado+AEI.jpg)
 
