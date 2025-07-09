@@ -1,19 +1,24 @@
 package es.uca.summerschool.smartwebapp.views.crud;
 
+
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.NativeLabel;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.Notification.Position;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -27,7 +32,11 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
 import es.uca.summerschool.smartwebapp.data.Book;
+import es.uca.summerschool.smartwebapp.services.ai.BookExtractorService;
+import es.uca.summerschool.smartwebapp.services.ai.ImageDescriptorService;
+import es.uca.summerschool.smartwebapp.services.ai.TextHandlerService;
 import es.uca.summerschool.smartwebapp.services.crud.BookService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
@@ -36,7 +45,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 import java.util.Optional;
 
-@PageTitle("CRUD")
+@PageTitle("CRUD + AI")
 @Route("master-detail/:sampleBookID?/:action?(edit)")
 @Menu(order = 5, icon = LineAwesomeIconUrl.COLUMNS_SOLID)
 @AnonymousAllowed
@@ -50,6 +59,9 @@ public class BookManagementView extends Div implements BeforeEnterObserver {
     private final Button save = new Button("Save");
     private final BeanValidationBinder<Book> binder;
     private final BookService sampleBookService;
+    private final BookExtractorService bookExtractorService;
+    private final TextHandlerService textHandlerService;
+    private final ImageDescriptorService imageDescriptorService;
     private Upload image;
     private Image imagePreview;
     private TextField name;
@@ -61,8 +73,11 @@ public class BookManagementView extends Div implements BeforeEnterObserver {
     private TextArea reviews;
     private Book sampleBook;
 
-    public BookManagementView(BookService sampleBookService) {
+    public BookManagementView(BookService sampleBookService, BookExtractorService bookExtractorService, TextHandlerService textHandlerService, ImageDescriptorService imageDescriptorService) {
         this.sampleBookService = sampleBookService;
+        this.bookExtractorService = bookExtractorService;
+        this.textHandlerService = textHandlerService;
+        this.imageDescriptorService = imageDescriptorService;
         addClassNames("book-management-view");
 
         // Create UI
@@ -129,7 +144,7 @@ public class BookManagementView extends Div implements BeforeEnterObserver {
             } catch (ObjectOptimisticLockingFailureException exception) {
                 Notification n = Notification.show(
                         "Error updating the data. Somebody else has updated the record while you were making changes.");
-                n.setPosition(Position.MIDDLE);
+                n.setPosition(Notification.Position.MIDDLE);
                 n.addThemeVariants(NotificationVariant.LUMO_ERROR);
             } catch (ValidationException validationException) {
                 Notification.show("Failed to update the data. Check again that all values are valid");
@@ -146,7 +161,7 @@ public class BookManagementView extends Div implements BeforeEnterObserver {
                 populateForm(sampleBookFromBackend.get());
             } else {
                 Notification.show(String.format("The requested sampleBook was not found, ID = %s", sampleBookId.get()),
-                        3000, Position.BOTTOM_START);
+                        3000, Notification.Position.BOTTOM_START);
                 // when a row is selected but the data is no longer available,
                 // refresh grid
                 refreshGrid();
@@ -178,7 +193,33 @@ public class BookManagementView extends Div implements BeforeEnterObserver {
         description = new TextArea("Description");
         reviews = new TextArea("Reviews");
 
-        formLayout.add(imageLabel, image, name, author, publicationDate, pages, isbn, description, reviews);
+
+        MenuBar menuBar = new MenuBar();
+        MenuItem magic = menuBar.addItem("Magic");
+        SubMenu magicSubMenu = magic.getSubMenu();
+
+        magicSubMenu.addItem("Describe image", e -> {
+            describeImage();
+        });
+
+        magicSubMenu.addItem("Translate description", e1 -> {
+            openTranslationDialog();
+        });
+
+        magicSubMenu.addItem("Summarize description", e1 -> {
+            summarizeText();
+        });
+
+        magicSubMenu.addItem("Analyse review", e -> {
+            analyseSentiment();
+        });
+
+        magicSubMenu.addItem("Extract data from text", e -> {
+            openExtractionDialog();
+        });
+
+
+        formLayout.add(imageLabel, image, name, author, publicationDate, pages, isbn, menuBar, description, reviews);
 
         editorDiv.add(formLayout);
         createButtonLayout(editorLayoutDiv);
@@ -186,7 +227,125 @@ public class BookManagementView extends Div implements BeforeEnterObserver {
         splitLayout.addToSecondary(editorLayoutDiv);
     }
 
+    private void describeImage() {
 
+        if (this.sampleBook != null && this.sampleBook.getImage() != null) {
+            String imageDescription = imageDescriptorService.describe(this.sampleBook.getImage());
+
+            Notification notification = new Notification();
+            notification.setDuration(5000);
+            notification.setPosition(Notification.Position.MIDDLE);
+
+            if (imageDescription != null && !imageDescription.isEmpty()) {
+                notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                notification.setText("Image description: " + imageDescription);
+            } else {
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                notification.setText("No description could be generated for the image.");
+            }
+            notification.open();
+
+
+        } else {
+            Notification.show("Please upload an image to describe.");
+        }
+
+
+    }
+
+    private void analyseSentiment() {
+        String text = this.reviews.getValue();
+        if (text != null && !text.isEmpty()) {
+            TextHandlerService.Sentiment sentiment = textHandlerService.analyzeSentimentOf(text);
+
+            Notification notification = new Notification();
+            notification.setDuration(5000);
+            notification.setPosition(Notification.Position.MIDDLE);
+            switch (sentiment) {
+                case POSITIVE:
+                    notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                    notification.setText("Sentiment analysis result: Positive :-)");
+                    break;
+                case NEUTRAL:
+                    notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
+                    notification.setText("Sentiment analysis result: Neutral :|");
+                    break;
+                case NEGATIVE:
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    notification.setText("Sentiment analysis result: Negative :(");
+                    break;
+            }
+            notification.open();
+        } else {
+            Notification.show("Please enter a valid text for sentiment analysis.");
+        }
+    }
+
+    private void summarizeText() {
+
+        String text = this.description.getValue();
+        if (text != null && !text.isEmpty()) {
+            String summary = textHandlerService.summarize(text, 20);
+            this.sampleBook.setDescription(summary);
+            populateForm(this.sampleBook);
+        } else {
+            Notification.show("Please enter a valid book description.");
+        }
+
+    }
+
+    private void openTranslationDialog() {
+        // Open a dialog showing a selector of the language among the available ones (en, es, fr, de)
+        Select<String> languageSelector = new Select<>();
+        languageSelector.setLabel("Select Language");
+        languageSelector.setItems("en", "es", "fr", "de");
+        languageSelector.setValue("es"); // Default to Spanish
+        Dialog dialog = new Dialog();
+        dialog.add(languageSelector);
+        Button translateButton = new Button("Translate", event -> {
+            String selectedLanguage = languageSelector.getValue();
+            String textToTranslate = this.description.getValue();
+            if (this.sampleBook != null && textToTranslate != null) {
+                String translatedText = textHandlerService.translate(textToTranslate, selectedLanguage);
+                this.sampleBook.setDescription(translatedText);
+                populateForm(this.sampleBook);
+                dialog.close();
+            } else {
+                Notification.show("Please enter a valid book description.");
+            }
+        });
+        dialog.add(translateButton);
+        dialog.setWidth("400px");
+        dialog.open();
+        translateButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+
+    }
+
+    @NotNull
+    private Dialog openExtractionDialog() {
+        // Open a dialog to enter text
+        TextArea textField = new TextArea("Enter book description");
+        textField.setWidth("100%");
+        Dialog dialog = new Dialog();
+        dialog.add(textField);
+        Button extractButton = new Button("Extract", event -> {
+            String text = textField.getValue();
+            if (text != null && !text.isEmpty()) {
+                Book extractedBook = bookExtractorService.extractBookFrom(text);
+                populateForm(extractedBook);
+                dialog.close();
+            } else {
+                Notification.show("Please enter a valid book description.");
+            }
+        });
+        dialog.add(extractButton);
+        dialog.setWidth("600px");
+        dialog.setHeight("400px");
+        dialog.open();
+        extractButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        return dialog;
+    }
 
     private void createButtonLayout(Div editorLayoutDiv) {
         HorizontalLayout buttonLayout = new HorizontalLayout();
