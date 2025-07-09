@@ -78,6 +78,11 @@ Application class.
 - [Vaadin](https://vaadin.com)
 - [LangChain4J](https://docs.langchain4j.dev/)
 
+## Information about Guardrails
+- [Top 20 LLM Guardrails With Examples](https://www.datacamp.com/blog/llm-guardrails?dc_referrer)
+- [The LLM Red Teaming Framework](https://github.com/confident-ai/deepteam)
+
+
 ## Author
 This project was developed by [Iván Ruiz Rube](https://www.linkedin.com/in/iv%C3%A1n-ruiz-rube-0970331a) and [Andrés Muñoz](https://es.linkedin.com/in/andr%C3%A9s-mu%C3%B1oz-ortega-52235415).
 
