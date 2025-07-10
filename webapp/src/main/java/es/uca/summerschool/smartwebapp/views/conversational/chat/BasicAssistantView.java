@@ -10,7 +10,7 @@ import es.uca.summerschool.smartwebapp.views.conversational.AbstractConversation
 import org.vaadin.lineawesome.LineAwesomeIconUrl;
 
 @PageTitle("Basic assistant")
-@Route(value = "conversational/prompteng/basicassistant", layout = MainLayout.class)
+@Route(value = "conversational/chat/basicassistant", layout = MainLayout.class)
 @Menu(order = 8, icon = LineAwesomeIconUrl.UNIVERSITY_SOLID)
 
 public class BasicAssistantView extends AbstractConversationalView {

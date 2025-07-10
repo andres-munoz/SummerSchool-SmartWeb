@@ -69,7 +69,7 @@ public class DatabaseAssistantService implements Conversational, Searchable {
         String[] lines = text.split("\n");
         for (String line : lines) {
             List<String> row = new ArrayList<>();
-            String[] columns = line.split(",");
+            String[] columns = line.split(",", -1);
             for (String column : columns) {
                 row.add(column);
             }

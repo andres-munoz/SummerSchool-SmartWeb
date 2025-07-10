@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,4 +43,8 @@ public class BookService {
         return (int) repository.count();
     }
 
+    public List<Book> listAll() {
+        return repository.findAll();
+
+    }
 }
