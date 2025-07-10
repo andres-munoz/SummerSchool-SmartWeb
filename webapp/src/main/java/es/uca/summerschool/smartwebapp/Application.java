@@ -5,6 +5,10 @@ import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
+import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
+import dev.langchain4j.store.embedding.EmbeddingStore;
+import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import es.uca.summerschool.smartwebapp.data.BookRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +33,17 @@ public class Application implements AppShellConfigurator {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
+    @Bean
+    public EmbeddingStore embeddingstore() {
+        return new InMemoryEmbeddingStore();
+    }
+
+    @Bean
+    public EmbeddingModel embeddingModel() {
+        return new AllMiniLmL6V2EmbeddingModel();
+    }
+
 
     @Bean
     SqlDataSourceScriptDatabaseInitializer dataSourceScriptDatabaseInitializer(DataSource dataSource,
